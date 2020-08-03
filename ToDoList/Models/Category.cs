@@ -6,7 +6,7 @@ namespace ToDoList.Models
     {
         public Category()
         {
-            this.Items = new HashSet<Item>();
+            this.Items = new HashSet<CategoryItem>();
         }
 
         public int CategoryId { get; set; }
