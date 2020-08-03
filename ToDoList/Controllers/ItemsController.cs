@@ -37,7 +37,10 @@ namespace ToDoList.Controllers
 
     public ActionResult Details(int id)
     {
-      Item thisItem = _db.Items.FirstOrDefault(items => items.ItemId == id);
+      Item thisItem = _db.Items
+          .Include(item => item.Categories)
+          .ThenInclude(join => join.Category)
+          .FirstOrDefault(item => item.ItemId == id);
       return View(thisItem);
     }
 
