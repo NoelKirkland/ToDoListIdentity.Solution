@@ -58,6 +58,10 @@ namespace ToDoList.Controllers
     [HttpPost]
     public ActionResult Edit(Item item, int CategoryId)
     {
+      // if (CategoryId != CategoryId)
+      // {
+      //   ViewBag.AlreadyAdded = "This category has already been added";
+      // }
       if (CategoryId != 0)
       {
         _db.CategoryItem.Add(new CategoryItem() { CategoryId = CategoryId, ItemId = item.ItemId });
@@ -107,6 +111,16 @@ namespace ToDoList.Controllers
         _db.CategoryItem.Remove(joinEntry);
         _db.SaveChanges();
         return RedirectToAction("Index");
+    }
+
+    [HttpPost]
+    public ActionResult CompleteItem(int completedId)
+    {
+      var thisItem = _db.Items.FirstOrDefault(items => items.ItemId == completedId);
+      thisItem.Completed = true;
+      _db.Entry(thisItem).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Index");
     }
   }
 }

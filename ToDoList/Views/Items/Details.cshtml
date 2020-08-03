@@ -8,6 +8,15 @@
 <hr />
 <h3>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)</h3>
 
+@if(@Model.Completed == true)
+{
+  <p>complete</p>
+}
+else
+{
+  <p>not complete</p>
+}
+
 @if (@Model.Categories.Count ==0 )
 {
   <p>This item does not belong to any categories</p>
